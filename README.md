@@ -23,9 +23,18 @@ This project template is a [Swift Package Manager](https://swift.org/package-man
 
 ## Quickstart
 
+### Scripts
+
+There are optionally scripts provided for the actions:
+
+* `run_tests.sh`
+* `run_app.sh`
+* `run_repl.sh`
+* `gen_proj.sh`
+
 ### 1) Add your model code
 
-* Add your Swift source files to the to `STSLibary` directory 
+* Add your Swift source files to the to `Sources/STSLibary` directory
 * If you'd like them to be part of the runnable application, add the appropriate calls to the `run()` method of `Application.swift`. Otherwise, that's it!
 
 ### 2) Build
@@ -72,7 +81,7 @@ docker run --rm --security-opt seccomp:unconfined -it \
     -lswiftTensorFlow
 ```
 
-Now you can import anything defined in the STSLibrary module and interact with it. In this case, we're running the application.
+Now you can import anything defined in the `STSLibrary` module and interact with it. In this case, we're running the application.
 
 ```
 Welcome to Swift version 4.2-dev (LLVM 04bdb56f3d, Clang b44dbbdf44). Type :help for assistance.
