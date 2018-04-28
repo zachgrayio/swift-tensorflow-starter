@@ -1,15 +1,11 @@
 import Foundation
 
 public final class Application {
+    let prefix = "STS"
 
-    // NOTE: this is covered by a test case
-    let message = "STS: Hello, world!"
-
-    public init() {
-
-    }
+    public init() {}
 
     public func run() throws {
-        print(message)
+        print("\(prefix): \(product())")
     }
 }
