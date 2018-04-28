@@ -88,7 +88,7 @@ STS: Hello, world!
 
 ### Generate .xcodeproj
 
-If desired, you can generate a `.xcodeproj` that you can open with an IDE (Xcode, AppCode, CLion). This is optional, and the xcodeproj is ignored in `.gitignore` by default.
+If desired, users on macOS can generate a `.xcodeproj` that you can open with an IDE (Xcode, AppCode, CLion). This is optional, and the xcodeproj is ignored in `.gitignore` by default. Also note that you'll want to swap out your xctoolchain as described [here](https://github.com/tensorflow/swift/blob/master/Installation.md) if you go this route.
 
 The following command mounts a volume in the current directory and generates the project, resulting in the file being written to your host's disk. 
 
