@@ -86,6 +86,20 @@ STS: Hello, world!
 
 ## Usage
 
+### Generate .xcodeproj
+
+If desired, you can generate a `.xcodeproj` that you can open with an IDE (Xcode, AppCode, CLion). This is optional, and the xcodeproj is ignored in `.gitignore` by default.
+
+The following command mounts a volume in the current directory and generates the project, resulting in the file being written to your host's disk. 
+
+```bash
+docker run --rm -v ${PWD}:/usr/src \
+    --entrypoint /usr/bin/swift \
+    sts-app \
+    package generate-xcodeproj
+open STSProject.xcodeproj
+```
+
 ### Third-party Libraries
 
 Third-party Swift libraries can be added to the `dependencies` collection in `Package.swift` and then imported for use. 

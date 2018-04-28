@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "STSLibrary",
+    name: "STSProject",
     products: [
         .library(
             name: "STSLibrary",
