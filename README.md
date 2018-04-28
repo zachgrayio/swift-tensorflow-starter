@@ -23,15 +23,6 @@ This project template is a [Swift Package Manager](https://swift.org/package-man
 
 ## Quickstart
 
-### Scripts
-
-There are optionally scripts provided for the actions:
-
-* `run_tests.sh`
-* `run_app.sh`
-* `run_repl.sh`
-* `gen_proj.sh`
-
 ### 1) Add your model code
 
 * Add your Swift source files to the to `Sources/STSLibary` directory
@@ -92,6 +83,15 @@ app: STSLibrary.Application = {}
 STS: Hello, world!
   4> :exit
 ```
+
+### Scripts
+
+There are optional scripts provided for common actions defined in steps 1-4 above:
+
+* `run_tests.sh`
+* `run_app.sh`
+* `run_repl.sh`
+* `gen_proj.sh`
 
 ## Usage
 
