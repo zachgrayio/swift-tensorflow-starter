@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-docker build -t sts-app .
-docker run --rm --security-opt seccomp:unconfined -it \
+docker build -t sts-app . && docker run --rm --security-opt seccomp:unconfined -it \
     --entrypoint /usr/bin/swift \
     sts-app \
     -I/usr/lib/swift/clang/include \
