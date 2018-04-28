@@ -1,12 +1,12 @@
 # swift-tensorflow-starter (STS)
 
-A Dockerized, Swift Package Manager enabled starter repository for Swift for TensorFlow projects.
+A [Docker](http://docker.com/)ized, [Swift Package Manager](https://swift.org/package-manager/) enabled starter repository for [Swift for TensorFlow](https://github.com/tensorflow/swift) projects.
 
 ## Overview
 
 ### Dual Architecture
 
-The project is aims to enable the creations of projects that strike a balance between two primary goals:
+The project is aims to enable the creation of projects that strike a balance between two primary goals:
 
 1. Can be easily packaged into deployable Docker image with an entrypoint to a release-built executable
 2. Provides quick and easy REPL access against Swift for Tensorflow code stored in the `STSLibrary` module 
@@ -19,7 +19,7 @@ This repository is Dockerized via the [swift-tensorflow](https://github.com/zach
 
 ### Swift Package Manager
 
-This project template is a Swift Package Manager project - `Package.swift` defines the runnable application, the core library, and third-party dependencies.
+This project template is a [Swift Package Manager](https://swift.org/package-manager/) project - `Package.swift` defines the runnable application, the core library, and third-party dependencies.
 
 ## Quickstart
 
