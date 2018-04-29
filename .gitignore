@@ -1,4 +1,5 @@
 STSProject.xcodeproj
+.idea
 
 /.build
 /Packages
