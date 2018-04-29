@@ -187,6 +187,12 @@ docker run --rm -v ${PWD}:/usr/src \
 open STSProject.xcodeproj
 ```
 
+### Examples
+
+* Using RxSwift: [[View Diff](https://github.com/zachgrayio/swift-tensorflow-starter/commit/cde51c28c608d9e08f460944eae836881fef47d9)]
+
+More examples coming soon!
+
 # Disclaimer
 
 A note from the official docs:
