@@ -3,6 +3,8 @@
   <br />
   <br />
   An opinionated Swift for TensorFlow starter project.
+  <br />
+  <br />
 </p>
 
 
