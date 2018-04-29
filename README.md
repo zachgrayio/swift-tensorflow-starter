@@ -4,11 +4,11 @@ A [Docker](http://docker.com/)ized, [Swift Package Manager](https://swift.org/pa
 
 ## Overview
 
-### Dual Architecture
+### Architecture
 
-The project is aims to enable the creation of projects that strike a balance between two primary goals:
+This project template's architecture aims to enable the creation of projects that strike a balance between two primary goals:
 
-1. Can be easily packaged into deployable Docker image with an entrypoint to a release-built executable
+1. Can be easily packaged into a deployable Docker image with an entrypoint to a release-built executable
 2. Provides quick and easy REPL access against Swift for Tensorflow code stored in the `STSLibrary` module 
 
 This will enable both ease of use during the research phase and a rapid transition to a scalable training solution and beyond (production deployment).
@@ -26,7 +26,7 @@ This project template is a [Swift Package Manager](https://swift.org/package-man
 ### 1) Add your model code
 
 * Add your Swift source files to the to `Sources/STSLibary` directory
-* If you'd like them to be part of the runnable application, add the appropriate calls to the `run()` method of `Application.swift`. Otherwise, that's it!
+* If you'd like them to be part of the runnable application, add the appropriate calls to the `run()` method of `Application.swift`. If you only want to access this code from the REPL, that's it!
 
 ### 2) Build
 
@@ -95,19 +95,15 @@ There are optional scripts provided for common actions defined in steps 1-4 abov
 
 ## Usage
 
-### Generate .xcodeproj
+### SwitfPM Project Settings
 
-If desired, users on macOS can generate a `.xcodeproj` that you can open with an IDE (Xcode, AppCode, CLion). This is optional, and the xcodeproj is ignored in `.gitignore` by default. Also note that you'll want to swap out your xctoolchain as described [here](https://github.com/tensorflow/swift/blob/master/Installation.md) if you go this route.
+By default the following names are used:
 
-The following command mounts a volume in the current directory and generates the project, resulting in the file being written to your host's disk. 
+* Executable: `STSApplication`
+* Library: `STSLibrary`
+* SwiftPM project: `STSProject`
 
-```bash
-docker run --rm -v ${PWD}:/usr/src \
-    --entrypoint /usr/bin/swift \
-    sts-app \
-    package generate-xcodeproj
-open STSProject.xcodeproj
-```
+If desired, you can easily override these values with a simple find/replace in the root directory. The two files which need changes are `Package.swift` and the `Dockerfile`.
 
 ### Third-party Libraries
 
@@ -126,6 +122,20 @@ dependencies: [
 ### System Dependencies
 
 The project's `Dockerfile` is based on Ubuntu 16, so you can simply add `RUN apt-get install -y ...` entries to fetch additional dependencies.
+
+### Generate .xcodeproj
+
+If desired, users on macOS can generate a `.xcodeproj` that you can open with an IDE (Xcode, AppCode, CLion). This is optional, and the xcodeproj is ignored in `.gitignore` by default. Also note that you'll want to swap out your xctoolchain as described [here](https://github.com/tensorflow/swift/blob/master/Installation.md) if you go this route.
+
+The following command mounts a volume in the current directory and generates the project, resulting in the file being written to your host's disk.
+
+```bash
+docker run --rm -v ${PWD}:/usr/src \
+    --entrypoint /usr/bin/swift \
+    sts-app \
+    package generate-xcodeproj
+open STSProject.xcodeproj
+```
 
 ## License
 
