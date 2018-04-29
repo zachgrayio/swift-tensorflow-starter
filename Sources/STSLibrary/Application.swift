@@ -6,6 +6,6 @@ public final class Application {
     public init() {}
 
     public func run() throws {
-        print("\(prefix): \(product())")
+        print("\(prefix): \(TensorFlowExample.multiplyTensor())")
     }
 }
