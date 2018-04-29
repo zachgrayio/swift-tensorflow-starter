@@ -8,7 +8,7 @@
 
 ## Overview
 
-STS is a a [Docker](http://docker.com/)ized, [Swift Package Manager](https://swift.org/package-manager/) enabled starter repository for [Swift for TensorFlow](https://github.com/tensorflow/swift) projects.
+STS is a [Docker](http://docker.com/)ized, [Swift Package Manager](https://swift.org/package-manager/) enabled starter repository for [Swift for TensorFlow](https://github.com/tensorflow/swift) projects.
 
 ### Architecture
 
@@ -96,6 +96,8 @@ Now you can either run the executable, or a REPL.
 
 ```bash
 docker run --rm sts-app
+...
+STS: [1.44, 0.64]
 ```
 
 #### Run a REPL with access to the library
@@ -120,7 +122,7 @@ Welcome to Swift version 4.2-dev (LLVM 04bdb56f3d, Clang b44dbbdf44). Type :help
   2> let app = Application()
 app: STSLibrary.Application = {}
   3> app.run()
-STS: Hello, world!
+STS: [1.44, 0.64]
   4> :exit
 ```
 
