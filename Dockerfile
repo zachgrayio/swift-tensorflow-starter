@@ -1,8 +1,6 @@
 FROM zachgray/swift-tensorflow:4.2
 
-MAINTAINER Zach Gray (zgray@scal.io)
-LABEL maintainer="Zach Gray <zgray@scal.io>"
-LABEL Description="Dockerized Swift for TensorFlow Starter Repository"
+LABEL Description="An STS Application"
 
 # Cache this step
 COPY Package.swift /usr/src
