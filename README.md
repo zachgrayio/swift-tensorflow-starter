@@ -6,7 +6,7 @@
 </p>
 
 
-## Overview
+# Overview
 
 STS is a [Docker](http://docker.com/)ized, [Swift Package Manager](https://swift.org/package-manager/) enabled starter repository for [Swift for TensorFlow](https://github.com/tensorflow/swift) projects.
 
@@ -39,7 +39,7 @@ The project is fully Dockerized via the [swift-tensorflow](https://github.com/za
 
 This project template is a [Swift Package Manager](https://swift.org/package-manager/) project - `Package.swift` defines the runnable application, the core library, and third-party dependencies.
 
-## Quickstart
+# Quickstart
 
 ### Prerequisites
 
@@ -135,7 +135,7 @@ There are optional scripts provided for common actions defined in steps 1-4 abov
 * `run_repl.sh`
 * `gen_proj.sh`
 
-## Usage
+# Usage
 
 ### SwitfPM Project Settings
 
@@ -185,12 +185,12 @@ docker run --rm -v ${PWD}:/usr/src \
 open STSProject.xcodeproj
 ```
 
-## Disclaimer
+# Disclaimer
 
 A note from the official docs:
 
 > Note: Swift for TensorFlow is an early stage research project. It has been released to enable open source development and is not yet ready for general use by machine learning developers.
 
-## License
+# License
 
 This project is [MIT Licensed](https://github.com/zachgrayio/swift-tensorflow-starter/blob/master/LICENSE).
