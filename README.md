@@ -1,7 +1,7 @@
 <p align="center">
   <img src="docs/assets/logo.png">
   <br />
-  <br /
+  <br />
   An opinionated Swift for TensorFlow starter project.
 </p>
 
