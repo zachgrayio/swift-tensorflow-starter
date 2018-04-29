@@ -7,5 +7,7 @@ public final class Application {
 
     public func run() throws {
         print("\(prefix): \(TensorFlowExample.multiplyTensor())")
+        print("\(prefix): Running RxExample:")
+        RxExample.printHello()
     }
 }
