@@ -12,12 +12,13 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/ReactiveX/RxSwift.git", "4.0.0" ..< "5.0.0")
+        //example:
+        // .package(url: "https://github.com/ReactiveX/RxSwift.git", "4.0.0" ..< "5.0.0")
     ],
     targets: [
         .target(
             name: "STSLibrary",
-            dependencies: ["RxSwift"]),
+            dependencies: []),
         .target(
             name: "STSApplication",
             dependencies: ["STSLibrary"]),
