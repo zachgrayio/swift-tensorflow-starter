@@ -1,21 +1,39 @@
-# swift-tensorflow-starter (STS)
+<p align="center">
+  <img src="docs/assets/logo.png">
+  <br />
+  <br /
+  An opinionated Swift for TensorFlow starter project.
+</p>
 
-A [Docker](http://docker.com/)ized, [Swift Package Manager](https://swift.org/package-manager/) enabled starter repository for [Swift for TensorFlow](https://github.com/tensorflow/swift) projects.
 
 ## Overview
 
+STS is a a [Docker](http://docker.com/)ized, [Swift Package Manager](https://swift.org/package-manager/) enabled starter repository for [Swift for TensorFlow](https://github.com/tensorflow/swift) projects.
+
 ### Architecture
 
-This project template's architecture aims to enable the creation of projects that strike a balance between two primary goals:
+Projects built with this template will have a resultant architecture with the following traits:
 
-1. Can be easily packaged into a deployable Docker image with an entrypoint to a release-built executable
-2. Provides quick and easy REPL access against Swift for Tensorflow code stored in the `STSLibrary` module 
+1. Build output is a deployable Docker image with an entrypoint to a release-built executable
+2. Provides quick and easy REPL access against the project's Swift for Tensorflow code and third-party libraries
+3. Easily unit testable
+4. Runs anywhere Docker is available with no additional setup necessary - zero conflicts with existing Swift or TensorFlow installations.
 
 This will enable both ease of use during the research phase and a rapid transition to a scalable training solution and beyond (production deployment).
 
+### Swift for TensorFlow
+
+<p align="center">
+  <img src="docs/assets/swift-tf-logo.png">
+</p>
+
+From the [official docs](https://github.com/tensorflow/swift):
+
+>Swift for TensorFlow is a new way to develop machine learning models. It gives you the power of [TensorFlow](https://www.tensorflow.org) directly integrated into the [Swift programming language](https://swift.org/about).
+
 ### Docker
 
-This repository is Dockerized via the [swift-tensorflow](https://github.com/zachgrayio/swift-tensorflow#7-start-the-repl-in-a-container) image, meaning you don't need to worry about setting up local dependencies or conflicts with existing Xcode/Swift installations when developing Swift+TF applications unless you really want to - all build/run tasks can be accomplished from within the container.
+The project is fully Dockerized via the [swift-tensorflow](https://github.com/zachgrayio/swift-tensorflow#7-start-the-repl-in-a-container) image, meaning you don't need to worry about setting up local dependencies or conflicts with existing Xcode/Swift installations when developing Swift+TF applications unless you really want to - all build/run tasks can be accomplished from within the container.
 
 ### Swift Package Manager
 
@@ -23,7 +41,27 @@ This project template is a [Swift Package Manager](https://swift.org/package-man
 
 ## Quickstart
 
-### 1) Add your model code
+### Prerequisites
+
+#### Install Docker CE
+
+Installation guides for macOS/Windows/Linux can be found [here](https://docs.docker.com/install/).
+
+#### Clone the `swift-tensorflow-starter` Repository
+
+```bash
+git clone --depth 1 https://github.com/zachgrayio/swift-tensorflow-starter.git
+cd swift-tensorflow-starter
+```
+
+Optionally, you may reset `git` so you can commit and push to your own repository:
+
+```bash
+rm -rf .git
+git init && git commit -am "initial"
+```
+
+### 1) Add your Swift TensorFlow code
 
 * Add your Swift source files to the to `Sources/STSLibary` directory
 * If you'd like them to be part of the runnable application, add the appropriate calls to the `run()` method of `Application.swift`. If you only want to access this code from the REPL, that's it!
@@ -41,6 +79,8 @@ Release:
 ```bash
 docker build --build-arg CONFIG=release -t sts-app .
 ```
+
+*Note: you may tag your built container as anything you'd like; if you use a different tag, be sure to use it instead of `sts-app` in the following bash commands.*
 
 ### 3) Run Unit Tests
 
@@ -103,7 +143,7 @@ By default the following names are used:
 * Library: `STSLibrary`
 * SwiftPM project: `STSProject`
 
-If desired, you can easily override these values with a simple find/replace in the root directory. The two files which need changes are `Package.swift` and the `Dockerfile`.
+If desired, you can easily override these values with a simple find/replace in the root directory. The files which need changes are `Package.swift` and the `Dockerfile`, the example test classes, and a few directory names in `Sources` and `Tests`.
 
 ### Third-party Libraries
 
@@ -123,6 +163,12 @@ dependencies: [
 
 The project's `Dockerfile` is based on Ubuntu 16, so you can simply add `RUN apt-get install -y ...` entries to fetch additional dependencies.
 
+### Writing Unit Tests
+
+See `STSLibraryTests.testApplicationPrefix()` in `Tests/STSLibraryTests/STSLibraryTests.swift` for an example test.
+
+*Note: TensorFlow is not yet supported in Unit Tests.*
+
 ### Generate .xcodeproj
 
 If desired, users on macOS can generate a `.xcodeproj` that you can open with an IDE (Xcode, AppCode, CLion). This is optional, and the xcodeproj is ignored in `.gitignore` by default. Also note that you'll want to swap out your xctoolchain as described [here](https://github.com/tensorflow/swift/blob/master/Installation.md) if you go this route.
@@ -136,6 +182,12 @@ docker run --rm -v ${PWD}:/usr/src \
     package generate-xcodeproj
 open STSProject.xcodeproj
 ```
+
+## Disclaimer
+
+A note from the official docs:
+
+> Note: Swift for TensorFlow is an early stage research project. It has been released to enable open source development and is not yet ready for general use by machine learning developers.
 
 ## License
 
