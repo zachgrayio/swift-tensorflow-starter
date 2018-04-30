@@ -79,21 +79,21 @@ git init && git commit -am "initial"
 Debug: 
 
 ```bash
-docker build -t sts-app .
+docker build -t sts-application .
 ```
 
 Release: 
 
 ```bash
-docker build --build-arg CONFIG=release -t sts-app .
+docker build --build-arg CONFIG=release -t sts-application .
 ```
 
-*Note: you may tag your built container as anything you'd like; if you use a different tag, be sure to use it instead of `sts-app` in the following bash commands.*
+*Note: you may tag your built container as anything you'd like; if you use a different tag, be sure to use it instead of `sts-application` in the following bash commands.*
 
 ### 3) Run Unit Tests
 
 ```bash
-docker run --rm --entrypoint "/usr/bin/swift" sts-app test
+docker run --rm --entrypoint "/usr/bin/swift" sts-application test
 ```
 
 ### 4) Run
@@ -103,7 +103,7 @@ Now you can either run the executable, or a REPL.
 #### Run the executable
 
 ```bash
-docker run --rm sts-app
+docker run --rm sts-application
 ...
 STS: [1.44, 0.64]
 ```
@@ -113,10 +113,10 @@ STS: [1.44, 0.64]
 ```bash
 docker run --rm --security-opt seccomp:unconfined -it \
     --entrypoint /usr/bin/swift \
-    sts-app \
+    sts-application \
     -I/usr/lib/swift/clang/include \
-    -I/usr/src/STSLibrary \
-    -L/usr/src/STSLibrary \
+    -I/usr/lib \
+    -L/usr/lib \
     -lSTSLibrary \
     -lswiftPython \
     -lswiftTensorFlow
@@ -134,14 +134,21 @@ STS: [1.44, 0.64]
   4> :exit
 ```
 
-### Scripts
+### Control Script
 
-There are optional scripts provided for common actions defined in steps 1-4 above:
+A control script is included for extra convenience for users on macOS/Linux, but the Docker commands shown in steps 1-4 below also work on Windows.
 
-* `run_tests.sh`
-* `run_app.sh`
-* `run_repl.sh`
-* `run_xcode.sh`
+Some example commands:
+
+* `./sts build --release`,  `./sts build -r`,   `./sts build -p`,   `./sts build --prod` - build the image with a release executable
+* `./sts run repl --build --name myrepl -v` - run a REPL in a container named myrepl, mounting the current directory as a volume, building the project first
+* `./sts run test`,  `./sts run tests --name testcontainer` - run unit tests
+* `./sts run xcode` - generate and opens a new xcode project
+* `./sts run app -b` - run the application, building the container first
+* `./sts run app -v` - runs an app tagged `myapp` with the current directory mounted as a volume to `/usr/src`.
+* `./sts run app -n mycontainer -b` - build and tag the current image `mycontainer` and then run it.
+
+NOTE: if you use `app run` and include the `-n|--name` flag, be sure to include `-b|--build`, or ensure you've previously built the container with the specified `-n`.
 
 # Usage
 
@@ -188,7 +195,7 @@ The following command mounts a volume in the current directory and generates the
 ```bash
 docker run --rm -v ${PWD}:/usr/src \
     --entrypoint /usr/bin/swift \
-    sts-app \
+    sts-application \
     package generate-xcodeproj
 open STSProject.xcodeproj
 ```
