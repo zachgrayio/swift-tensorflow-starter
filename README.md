@@ -136,7 +136,7 @@ STS: [1.44, 0.64]
 
 ### Control Script
 
-A control script is included for extra convenience for users on macOS/Linux, but the Docker commands shown in steps 1-4 below also work on Windows.
+A control script is included for extra convenience for users on macOS/Linux, but the Docker commands shown in steps 1-4 above also work on Windows.
 
 Some example commands:
 
