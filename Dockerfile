@@ -14,7 +14,9 @@ WORKDIR /usr/src
 ARG CONFIG=debug
 
 RUN swift build --configuration ${CONFIG}
-RUN ln -s ./.build/${CONFIG} ./STSLibrary
-RUN ln -s ./.build/${CONFIG}/STSApplication ./STSApplication
 
-ENTRYPOINT ./STSApplication
+RUN cp ./.build/${CONFIG}/libSTSLibrary.so /usr/lib/libSTSLibrary.so
+RUN cp ./.build/${CONFIG}/STSLibrary.swiftmodule /usr/lib/STSLibrary.swiftmodule
+RUN cp ./.build/${CONFIG}/STSApplication /usr/bin/STSApplication
+
+ENTRYPOINT /usr/bin/STSApplication

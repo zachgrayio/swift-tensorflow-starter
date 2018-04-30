@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+
+POSITIONAL=()
+STS_NAME=sts-application
+STS_BUILD_ENABLED=false
+
+TXT_NC='\033[0m'
+TXT_GREEN='\033[0;32m'
+TXT_RED='\033[0;31m'
+
+while [[ $# -gt 0 ]]
+do
+key="$1"
+
+case ${key} in
+    -n|--name)
+    STS_NAME="$2"
+    shift
+    shift
+    ;;
+    -v|--volume)
+    STS_VOLUME_ENABLED=true
+    shift
+    ;;
+    -b|--build)
+    STS_BUILD_ENABLED=true
+    shift
+    ;;
+    -p|--prod|-r|--release)
+    STS_RELEASE_CONFIG_ENABLED=true
+    shift
+    ;;
+    *)    # unknown option
+    POSITIONAL+=("$1")
+    shift
+    ;;
+esac
+done
+set -- "${POSITIONAL[@]}"
+
+STS_COMMAND=${POSITIONAL[0]}
+STS_COMMAND_ARG=${POSITIONAL[1]}
+
+# volume flag
+if [ "$STS_VOLUME_ENABLED" = true ] ; then
+    STS_VOLUME_FLAG="-v $PWD:/usr/src"
+else
+    STS_VOLUME_FLAG=""
+fi
+
+# configuration build arg flag
+if [ "$STS_RELEASE_CONFIG_ENABLED" = true ] ; then
+    STS_BUILD_COMMAND="docker build -t ${STS_NAME} --build-arg CONFIG=release . "
+else
+    STS_BUILD_COMMAND="docker build -t ${STS_NAME} ."
+fi
+
+case ${STS_COMMAND} in
+    build)
+    echo -e "[STS][build] Building with:  ${TXT_GREEN}${STS_BUILD_COMMAND}${TXT_NC}"
+    eval ${STS_BUILD_COMMAND}
+    ;;
+    run)
+    case ${STS_COMMAND_ARG} in
+        app)
+        RUN_COMMAND="docker run --rm ${STS_VOLUME_FLAG} ${STS_NAME}"
+        ;;
+        repl)
+        RUN_COMMAND="docker run --rm ${STS_VOLUME_FLAG} --security-opt seccomp:unconfined -it \
+            --entrypoint /usr/bin/swift \
+            ${STS_NAME} \
+            -I/usr/lib/swift/clang/include \
+            -I/usr/lib \
+            -L/usr/lib \
+            -lSTSLibrary \
+            -lswiftPython \
+            -lswiftTensorFlow"
+        ;;
+        test|tests)
+        RUN_COMMAND="docker run --rm ${STS_VOLUME_FLAG} --entrypoint "/usr/bin/swift" ${STS_NAME} test"
+        ;;
+        xcode)
+        RUN_COMMAND="docker run --rm -v ${PWD}:/usr/src \
+            --entrypoint /usr/bin/swift \
+            ${STS_NAME} \
+            package generate-xcodeproj \
+            && open STSProject.xcodeproj"
+        ;;
+        *)
+        echo -e "[STS][run] ${TXT_RED}Unknown or empty argument passed to run: '${STS_COMMAND_ARG}'${TXT_NC}"
+        ;;
+    esac
+    if [ -n "$RUN_COMMAND" ] ; then
+        if [ "$STS_BUILD_ENABLED" = true ] && [ -n "$STS_COMMAND_ARG" ]; then
+            echo -e "[STS][run] -b|--build was passed; building with:  ${TXT_GREEN}${STS_BUILD_COMMAND}${TXT_NC}"
+            eval ${STS_BUILD_COMMAND}
+        fi
+        echo -e "[STS][run][${STS_COMMAND_ARG}] running with:  ${TXT_GREEN}${RUN_COMMAND}${TXT_NC}"
+        eval ${RUN_COMMAND}
+    fi
+    ;;
+esac
