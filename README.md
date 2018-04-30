@@ -17,7 +17,7 @@ STS is a [Docker](http://docker.com/)ized, [Swift Package Manager](https://swift
 Projects built with this template will have the following traits:
 
 1. Build output is a deployable Docker image with an entrypoint to a release-built executable
-2. Quick and easy REPL access against the project's Swift for Tensorflow code and third-party libraries
+2. Quick and easy [REPL](https://github.com/tensorflow/swift/blob/master/Usage.md#repl-read-eval-print-loop) access against the project's Swift for Tensorflow code and third-party libraries
 3. Easily unit testable
 4. Runs anywhere Docker is available with no additional setup necessary - zero conflicts with existing Swift or TensorFlow installations.
 
