@@ -35,7 +35,9 @@ From the [official docs](https://github.com/tensorflow/swift):
 
 ### Docker
 
-The project is fully Dockerized via the [swift-tensorflow](https://github.com/zachgrayio/swift-tensorflow#7-start-the-repl-in-a-container) image, meaning you don't need to worry about setting up local dependencies or conflicts with existing Xcode/Swift installations when developing Swift+TF applications unless you really want to - all build/run tasks can be accomplished from within the container.
+The project is fully Dockerized via the [swift-tensorflow](https://github.com/zachgrayio/swift-tensorflow) image, meaning you don't need to worry about setting up local dependencies or conflicts with existing Xcode/Swift installations when developing Swift+TF applications unless you really want to - all build/run tasks can be accomplished from within the container.
+
+More information on the base docker image and avanced usage examples can be found in it's [README](https://github.com/zachgrayio/swift-tensorflow/blob/master/README.md).
 
 ### Swift Package Manager
 
