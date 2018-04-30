@@ -14,10 +14,10 @@ STS is a [Docker](http://docker.com/)ized, [Swift Package Manager](https://swift
 
 ### Architecture
 
-Projects built with this template will have a resultant architecture with the following traits:
+Projects built with this template will have the following traits:
 
 1. Build output is a deployable Docker image with an entrypoint to a release-built executable
-2. Provides quick and easy REPL access against the project's Swift for Tensorflow code and third-party libraries
+2. Quick and easy REPL access against the project's Swift for Tensorflow code and third-party libraries
 3. Easily unit testable
 4. Runs anywhere Docker is available with no additional setup necessary - zero conflicts with existing Swift or TensorFlow installations.
 
@@ -139,7 +139,7 @@ There are optional scripts provided for common actions defined in steps 1-4 abov
 
 # Usage
 
-### SwitfPM Project Settings
+### SwiftPM Project Settings
 
 By default the following names are used:
 
@@ -190,8 +190,20 @@ open STSProject.xcodeproj
 ### Examples
 
 * Using RxSwift: [[View Diff](https://github.com/zachgrayio/swift-tensorflow-starter/commit/cde51c28c608d9e08f460944eae836881fef47d9)]
+* Serving TensorFlow models with HTTP: coming soon.
+* Training TensorFlow models over HTTP: coming soon.
 
-More examples coming soon!
+### Leaving the Container
+
+If you wish to run `swift build` and `swift run` on your project outside of the docker conainer, this is possible.
+
+* On Linux: you've got this.
+* On macOS: ensure you've [installed](https://github.com/tensorflow/swift/blob/master/Installation.md) the Swift for TensorFlow toolchain, and then use the following commands from within the project directory:
+
+```bash
+export PATH=/Library/Developer/Toolchains/swift-latest/usr/bin:"${PATH}"
+swift run
+```
 
 # Disclaimer
 
