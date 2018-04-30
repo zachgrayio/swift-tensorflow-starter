@@ -6,6 +6,7 @@ STS_BUILD_ENABLED=false
 
 TXT_NC='\033[0m'
 TXT_GREEN='\033[0;32m'
+TXT_YELLOW='\033[0;33m'
 TXT_RED='\033[0;31m'
 
 while [[ $# -gt 0 ]]
@@ -57,7 +58,7 @@ fi
 
 case ${STS_COMMAND} in
     build)
-    echo -e "[STS][build] Building with:  ${TXT_GREEN}${STS_BUILD_COMMAND}${TXT_NC}"
+    echo -e "[STS][build] Building with: ${TXT_GREEN}${STS_BUILD_COMMAND}${TXT_NC}"
     eval ${STS_BUILD_COMMAND}
     ;;
     run)
@@ -92,10 +93,14 @@ case ${STS_COMMAND} in
     esac
     if [ -n "$RUN_COMMAND" ] ; then
         if [ "$STS_BUILD_ENABLED" = true ] && [ -n "$STS_COMMAND_ARG" ]; then
-            echo -e "[STS][run] -b|--build was passed; building with:  ${TXT_GREEN}${STS_BUILD_COMMAND}${TXT_NC}"
+            echo -e "[STS][run] -b|--build was passed; building with: ${TXT_GREEN}${STS_BUILD_COMMAND}${TXT_NC}"
             eval ${STS_BUILD_COMMAND}
         fi
-        echo -e "[STS][run][${STS_COMMAND_ARG}] running with:  ${TXT_GREEN}${RUN_COMMAND}${TXT_NC}"
+        if [ "$(docker images -q ${STS_NAME} 2> /dev/null)" == "" ] ; then
+            echo -e "[STS][run][${STS_COMMAND_ARG}] ${TXT_YELLOW}Image with tag '${STS_NAME}' not found;${TXT_NC} building with: ${TXT_GREEN}${STS_BUILD_COMMAND}${TXT_NC}"
+            eval ${STS_BUILD_COMMAND}
+        fi
+        echo -e "[STS][run][${STS_COMMAND_ARG}] running with: ${TXT_GREEN}${RUN_COMMAND}${TXT_NC}"
         eval ${RUN_COMMAND}
     fi
     ;;

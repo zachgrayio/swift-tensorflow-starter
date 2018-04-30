@@ -148,7 +148,7 @@ Some example commands:
 * `./sts run app -v` - runs an app tagged `myapp` with the current directory mounted as a volume to `/usr/src`.
 * `./sts run app -n mycontainer -b` - build and tag the current image `mycontainer` and then run it.
 
-NOTE: if you use `app run` and include the `-n|--name` flag, be sure to include `-b|--build`, or ensure you've previously built the container with the specified `-n`.
+NOTE: if you don't include the `-b|--build` flag to `app run` then the previously built image with that tag/name will be started. If an image with this tag is not found, one will be built.
 
 # Usage
 
