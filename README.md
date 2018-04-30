@@ -135,7 +135,7 @@ There are optional scripts provided for common actions defined in steps 1-4 abov
 * `run_tests.sh`
 * `run_app.sh`
 * `run_repl.sh`
-* `gen_proj.sh`
+* `run_xcode.sh`
 
 # Usage
 
@@ -147,7 +147,7 @@ By default the following names are used:
 * Library: `STSLibrary`
 * SwiftPM project: `STSProject`
 
-If desired, you can easily override these values with a simple find/replace in the root directory. The files which need changes are `Package.swift` and the `Dockerfile`, the example test classes, and a few directory names in `Sources` and `Tests`.
+If desired, you can easily override these values with a simple find/replace in the root directory. The files which need changes are `Package.swift` and the `Dockerfile`, the example test classes and run scripts, and a few directory names in `Sources` and `Tests`.
 
 ### Third-party Libraries
 
@@ -186,6 +186,8 @@ docker run --rm -v ${PWD}:/usr/src \
     package generate-xcodeproj
 open STSProject.xcodeproj
 ```
+
+*Note: You can also run the `run_xcode.sh` script to generate and open the project.*
 
 ### Examples
 
