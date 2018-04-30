@@ -12,6 +12,20 @@
 
 STS is a [Docker](http://docker.com/)ized, [Swift Package Manager](https://swift.org/package-manager/) enabled starter repository for [Swift for TensorFlow](https://github.com/tensorflow/swift) projects.
 
+### Swift for TensorFlow
+
+<p align="center">
+  <img src="docs/assets/swift-tf-logo.png">
+</p>
+
+From the [official docs](https://github.com/tensorflow/swift):
+
+>Swift for TensorFlow is a new way to develop machine learning models. It gives you the power of [TensorFlow](https://www.tensorflow.org) directly integrated into the [Swift programming language](https://swift.org/about).
+
+#### Disclaimer
+
+> Note: Swift for TensorFlow is an early stage research project. It has been released to enable open source development and is not yet ready for general use by machine learning developers.
+
 ### Architecture
 
 Projects built with this template will have the following traits:
@@ -22,16 +36,6 @@ Projects built with this template will have the following traits:
 4. Runs anywhere Docker is available with no additional setup necessary - zero conflicts with existing Swift or TensorFlow installations.
 
 This will enable both ease of use during the research phase and a rapid transition to a scalable training solution and beyond (production deployment).
-
-### Swift for TensorFlow
-
-<p align="center">
-  <img src="docs/assets/swift-tf-logo.png">
-</p>
-
-From the [official docs](https://github.com/tensorflow/swift):
-
->Swift for TensorFlow is a new way to develop machine learning models. It gives you the power of [TensorFlow](https://www.tensorflow.org) directly integrated into the [Swift programming language](https://swift.org/about).
 
 ### Docker
 
@@ -208,12 +212,6 @@ If you wish to run `swift build` and `swift run` on your project outside of the 
 export PATH=/Library/Developer/Toolchains/swift-latest/usr/bin:"${PATH}"
 swift run
 ```
-
-# Disclaimer
-
-A note from the official docs:
-
-> Note: Swift for TensorFlow is an early stage research project. It has been released to enable open source development and is not yet ready for general use by machine learning developers.
 
 # License
 
