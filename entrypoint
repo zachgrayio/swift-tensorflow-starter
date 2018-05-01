@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+CONFIG=$1
+LIVE=$2
+KILL=false
+
+handle_interrupt() {
+    KILL=true
+}
+
+build() {
+    swift build --configuration ${CONFIG}
+}
+
+installApplication() {
+    cp ./.build/${CONFIG}/libSTSLibrary.so /usr/lib/libSTSLibrary.so
+    cp ./.build/${CONFIG}/STSLibrary.swiftmodule /usr/lib/STSLibrary.swiftmodule
+    cp ./.build/${CONFIG}/STSApplication /usr/bin/STSApplication
+}
+
+runApplication() {
+    /usr/bin/STSApplication
+}
+
+buildAndRun() {
+    build && installApplication && runApplication
+}
+
+detectChangesLoop() {
+    while [[ "$KILL" != true ]]
+    do
+        files=`find Sources* -type f -newer /usr/bin/STSApplication`
+        if [[ ${files} != "" ]] ; then
+            echo "Changes in files: $files, building..."
+            buildAndRun
+            echo "Waiting for changes to run application again."
+        fi
+        sleep 2
+    done
+}
+
+entrypoint() {
+    buildAndRun
+}
+
+liveEntrypoint() {
+    buildAndRun
+    echo "Waiting for changes to run application again."
+    detectChangesLoop &
+    wait
+}
+
+if [ "$LIVE" = true ] ; then
+    liveEntrypoint
+else
+    entrypoint
+fi
