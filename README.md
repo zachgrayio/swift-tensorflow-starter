@@ -34,6 +34,7 @@ Projects built with this template will have the following traits:
 2. Quick and easy [REPL](https://github.com/tensorflow/swift/blob/master/Usage.md#repl-read-eval-print-loop) access against the project's Swift for Tensorflow code and third-party libraries
 3. Easily unit testable
 4. Runs anywhere Docker is available with no additional setup necessary - zero conflicts with existing Swift or TensorFlow installations.
+5. Swift code is hot-reloaded on change; third-party libraries are downloaded automatically as well. See the `--live` flag.
 
 This will enable both ease of use during the research phase and a rapid transition to a scalable training solution and beyond (production deployment).
 
@@ -140,6 +141,7 @@ A control script is included for extra convenience for users on macOS/Linux, but
 
 Some example commands:
 
+* `./sts run app --live` - automatically rebuild and run the application on code change; packages are updated automatically as well!
 * `./sts build --release`,  `./sts build -r`,   `./sts build -p`,   `./sts build --prod` - build the image with a release executable
 * `./sts run repl --build --name myrepl -v` - run a REPL in a container named myrepl, mounting the current directory as a volume, building the project first
 * `./sts run test`,  `./sts run tests --name testcontainer` - run unit tests

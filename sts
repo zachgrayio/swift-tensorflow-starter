@@ -10,7 +10,7 @@ TXT_GREEN='\033[0;32m'
 TXT_YELLOW='\033[0;33m'
 TXT_RED='\033[0;31m'
 
-while [[ $# -gt 0 ]]
+while [ $# -gt 0 ]
 do
     key="$1"
     case ${key} in
