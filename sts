@@ -3,39 +3,43 @@
 POSITIONAL=()
 STS_NAME=sts-application
 STS_BUILD_ENABLED=false
+STS_LIVE_ENABLED=false
 
 TXT_NC='\033[0m'
 TXT_GREEN='\033[0;32m'
 TXT_YELLOW='\033[0;33m'
 TXT_RED='\033[0;31m'
 
-while [[ $# -gt 0 ]]
+while [ $# -gt 0 ]
 do
-key="$1"
-
-case ${key} in
-    -n|--name)
-    STS_NAME="$2"
-    shift
-    shift
-    ;;
-    -v|--volume)
-    STS_VOLUME_ENABLED=true
-    shift
-    ;;
-    -b|--build)
-    STS_BUILD_ENABLED=true
-    shift
-    ;;
-    -p|--prod|-r|--release)
-    STS_RELEASE_CONFIG_ENABLED=true
-    shift
-    ;;
-    *)    # unknown option
-    POSITIONAL+=("$1")
-    shift
-    ;;
-esac
+    key="$1"
+    case ${key} in
+        -n|--name)
+        STS_NAME="$2"
+        shift
+        shift
+        ;;
+        -v|--volume)
+        STS_VOLUME_ENABLED=true
+        shift
+        ;;
+        -b|--build)
+        STS_BUILD_ENABLED=true
+        shift
+        ;;
+        -p|--prod|-r|--release)
+        STS_RELEASE_CONFIG_ENABLED=true
+        shift
+        ;;
+        -l|--live)
+        STS_LIVE_ENABLED=true
+        shift
+        ;;
+        *)    # unknown option
+        POSITIONAL+=("$1")
+        shift
+        ;;
+    esac
 done
 set -- "${POSITIONAL[@]}"
 
@@ -56,6 +60,15 @@ else
     STS_BUILD_COMMAND="docker build -t ${STS_NAME} ."
 fi
 
+# live flag
+if [ "$STS_LIVE_ENABLED" = true ] ; then
+    STS_VOLUME_FLAG="-v $PWD:/usr/src"
+    STS_LIVE_FLAG="-e LIVE=true"
+else
+    STS_VOLUME_FLAG=""
+    STS_LIVE_FLAG=""
+fi
+
 case ${STS_COMMAND} in
     build)
     echo -e "[STS][build] Building with: ${TXT_GREEN}${STS_BUILD_COMMAND}${TXT_NC}"
@@ -64,7 +77,7 @@ case ${STS_COMMAND} in
     run)
     case ${STS_COMMAND_ARG} in
         app)
-        RUN_COMMAND="docker run --rm ${STS_VOLUME_FLAG} ${STS_NAME}"
+        RUN_COMMAND="docker run --rm -it ${STS_LIVE_FLAG} ${STS_VOLUME_FLAG} ${STS_NAME}"
         ;;
         repl)
         RUN_COMMAND="docker run --rm ${STS_VOLUME_FLAG} --security-opt seccomp:unconfined -it \

@@ -12,12 +12,9 @@ RUN swift package update
 ADD ./ /usr/src
 
 # user can pass in CONFIG=release to override
-ARG CONFIG=debug
+ENV CONFIG=debug
 
-RUN swift build --configuration ${CONFIG}
+# user can pass in LIVE=true
+ENV LIVE=false
 
-RUN cp ./.build/${CONFIG}/libSTSLibrary.so /usr/lib/libSTSLibrary.so
-RUN cp ./.build/${CONFIG}/STSLibrary.swiftmodule /usr/lib/STSLibrary.swiftmodule
-RUN cp ./.build/${CONFIG}/STSApplication /usr/bin/STSApplication
-
-ENTRYPOINT /usr/bin/STSApplication
+ENTRYPOINT ./entrypoint $CONFIG $LIVE
