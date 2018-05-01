@@ -10,7 +10,7 @@
 
 # Overview
 
-STS is a [Docker](http://docker.com/)ized, [Swift Package Manager](https://swift.org/package-manager/) enabled starter repository for [Swift for TensorFlow](https://github.com/tensorflow/swift) projects.
+STS is a [Docker](http://docker.com/)ized, [Swift Package Manager](https://swift.org/package-manager/) enabled starter repository for [Swift for TensorFlow](https://github.com/tensorflow/swift) projects. Now with hot-reload of Swift code and third-party packages!
 
 ### Swift for TensorFlow
 
@@ -34,7 +34,7 @@ Projects built with this template will have the following traits:
 2. Quick and easy [REPL](https://github.com/tensorflow/swift/blob/master/Usage.md#repl-read-eval-print-loop) access against the project's Swift for Tensorflow code and third-party libraries
 3. Easily unit testable
 4. Runs anywhere Docker is available with no additional setup necessary - zero conflicts with existing Swift or TensorFlow installations.
-5. Swift code is hot-reloaded on change; third-party libraries are downloaded automatically as well. See the `--live` flag.
+5. *Swift code is hot-reloaded on change; third-party libraries are downloaded automatically as well. See the `--live` flag.*
 
 This will enable both ease of use during the research phase and a rapid transition to a scalable training solution and beyond (production deployment).
 
