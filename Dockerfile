@@ -4,7 +4,7 @@ LABEL Description="An STS Application"
 
 WORKDIR /usr/src
 
-RUN apt-get update && apt-get install inotify-tools -y && rm -rf /var/cache/apk/*
+RUN apt-get update && apt-get install inotify-tools -y
 
 # Cache this step
 COPY Package.swift /usr/src
