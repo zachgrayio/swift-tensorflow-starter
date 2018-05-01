@@ -4,6 +4,8 @@ LABEL Description="An STS Application"
 
 WORKDIR /usr/src
 
+RUN apt-get update && apt-get install inotify-tools -y && rm -rf /var/cache/apk/*
+
 # Cache this step
 COPY Package.swift /usr/src
 RUN swift package update
@@ -16,5 +18,11 @@ ENV CONFIG=debug
 
 # user can pass in LIVE=true
 ENV LIVE=false
+
+RUN swift build --configuration ${CONFIG}
+
+RUN cp ./.build/${CONFIG}/libSTSLibrary.so /usr/lib/libSTSLibrary.so
+RUN cp ./.build/${CONFIG}/STSLibrary.swiftmodule /usr/lib/STSLibrary.swiftmodule
+RUN cp ./.build/${CONFIG}/STSApplication /usr/bin/STSApplication
 
 ENTRYPOINT ./entrypoint $CONFIG $LIVE

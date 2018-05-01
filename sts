@@ -60,7 +60,7 @@ else
     STS_BUILD_COMMAND="docker build -t ${STS_NAME} ."
 fi
 
-# live flag
+# live flag TODO: Fix conflict edge case with volume and live flags
 if [ "$STS_LIVE_ENABLED" = true ] ; then
     STS_VOLUME_FLAG="-v $PWD:/usr/src"
     STS_LIVE_FLAG="-e LIVE=true"
@@ -80,6 +80,9 @@ case ${STS_COMMAND} in
         RUN_COMMAND="docker run --rm -it ${STS_LIVE_FLAG} ${STS_VOLUME_FLAG} ${STS_NAME}"
         ;;
         repl)
+        if [ "$STS_LIVE_ENABLED" = true ] ; then
+            echo -e "[STS][run][${STS_COMMAND_ARG}] ignoring unsupported flag: ${TXT_YELLOW}-l|--live${TXT_NC}"
+        fi
         RUN_COMMAND="docker run --rm ${STS_VOLUME_FLAG} --security-opt seccomp:unconfined -it \
             --entrypoint /usr/bin/swift \
             ${STS_NAME} \
@@ -91,9 +94,16 @@ case ${STS_COMMAND} in
             -lswiftTensorFlow"
         ;;
         test|tests)
-        RUN_COMMAND="docker run --rm ${STS_VOLUME_FLAG} --entrypoint "/usr/bin/swift" ${STS_NAME} test"
+        # TODO: Finish live reloaded tests; need to think about the --entrypoint usage
+        if [ "$STS_LIVE_ENABLED" = true ] ; then
+            echo -e "[STS][test][${STS_COMMAND_ARG}] ignoring unsupported flag: ${TXT_YELLOW}-l|--live${TXT_NC}"
+        fi
+        RUN_COMMAND="docker run --rm -it ${STS_LIVE_FLAG} ${STS_VOLUME_FLAG} --entrypoint "/usr/bin/swift" ${STS_NAME} test"
         ;;
         xcode)
+        if [ "$STS_LIVE_ENABLED" = true ] ; then
+            echo -e "[STS][run][${STS_COMMAND_ARG}] ignoring unsupported flag: ${TXT_YELLOW}-l|--live${TXT_NC}"
+        fi
         RUN_COMMAND="docker run --rm -v ${PWD}:/usr/src \
             --entrypoint /usr/bin/swift \
             ${STS_NAME} \

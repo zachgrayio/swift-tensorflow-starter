@@ -2,11 +2,6 @@
 
 CONFIG=$1
 LIVE=$2
-KILL=false
-
-handle_interrupt() {
-    KILL=true
-}
 
 build() {
     swift build --configuration ${CONFIG}
@@ -27,18 +22,16 @@ build_and_run() {
 }
 
 watch_files() {
-    while [ ${KILL} != true ]
-    do
-        files=`find *.swift -type f -newer /usr/bin/STSApplication`
-        if [[ ${files} != "" ]] ; then
-            echo "Changes in files: $files, building..."
-            if [[ ${files} = *"Package.swift" ]] ; then
+    inotifywait --quiet --recursive --monitor --event modify --format "%w%f" . \
+    | while read file change; do
+        if [[ ${file} = *".swift" ]] ; then
+            echo "Changes in file: $file, building..."
+            if [[ ${file} = *"Package.swift" ]] ; then
                 swift package update
             fi
             build_and_run
             echo "Waiting for changes to run application again."
         fi
-        sleep 2
     done
 }
 
@@ -47,7 +40,7 @@ entrypoint() {
 }
 
 live_entrypoint() {
-    build_and_run
+    run_application
     echo "Waiting for changes to run application again."
     watch_files &
     wait
