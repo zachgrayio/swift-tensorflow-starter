@@ -44,6 +44,8 @@ The project is fully Dockerized via the [swift-tensorflow](https://github.com/za
 
 More information on the base docker image and avanced usage examples can be found in its [README](https://github.com/zachgrayio/swift-tensorflow/blob/master/README.md).
 
+* Note: The initial Docker build may take some time; Docker needs to download intermediate layers for the Ubuntu16 image if you haven't used it previously. However, subsequent builds should complete in under 10 seconds on a reasonable machine.*
+
 ### Swift Package Manager
 
 This project template is a [Swift Package Manager](https://swift.org/package-manager/) project - `Package.swift` defines the runnable application, the core library, and third-party dependencies.
@@ -70,10 +72,36 @@ rm -rf .git
 git init && git commit -am "initial"
 ```
 
+## The Easy Way
+
+Users on macOS and Linux can take advantage of the supplied run script for easy usage - no Docker required!
+
+### 1) Build and Run with Hot Reload enabled
+
+After cloning, you can start the project in a single command using the `sts` executable that's included:
+
+```bash
+./sts run app --build --live
+```
+
+After this, any changes you make to the project will result in the Swift code being rebuilt in the container and the executable started. You can exit with `CTRL+C`.
+
+### 2) Add your Swift TensorFlow code
+
+* Add your Swift source files to the to `Sources/STSLibary` directory
+* If you'd like them to be part of the runnable application, add the appropriate calls to the `run()` method of `Application.swift`. Assuming you wire up valid code, you'll see your output.
+* If you'd rather just run the REPL, `CTRL-C` out of this session and run `./sts run repl --build`
+
+That's it! However, it's recommended to continue reading and learn more about the underlying Docker container.
+
+## The Hard Way
+
+The following 4 steps describe how to add your code, build, and run the project with nothing other than the Docker binary; this should be relatively accurate cross-platform.
+
 ### 1) Add your Swift TensorFlow code
 
 * Add your Swift source files to the to `Sources/STSLibary` directory
-* If you'd like them to be part of the runnable application, add the appropriate calls to the `run()` method of `Application.swift`. If you only want to access this code from the REPL, that's it!
+* If you'd like them to be part of the runnable application, add the appropriate calls to the `run()` method of `Application.swift`. If you only want to access this code from the REPL, no further work is required now.
 
 ### 2) Build
 
