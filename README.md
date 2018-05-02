@@ -74,7 +74,7 @@ git init && git commit -am "initial"
 
 ## The Easy Way
 
-Users on macOS and Linux can take advantage of the supplied run script for easy usage - no Docker required!
+Users on macOS and Linux can take advantage of the supplied run script for easy usage - no Docker expertise required!
 
 ### 1) Build and Run with Hot Reload enabled
 
