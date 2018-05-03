@@ -19,7 +19,7 @@ ENV CONFIG=debug
 # user can pass in LIVE=true
 ENV LIVE=false
 
-RUN swift build --configuration ${CONFIG}
+RUN swift build -Xswiftc -O --configuration ${CONFIG}
 
 RUN cp ./.build/${CONFIG}/libSTSLibrary.so /usr/lib/libSTSLibrary.so
 RUN cp ./.build/${CONFIG}/STSLibrary.swiftmodule /usr/lib/STSLibrary.swiftmodule

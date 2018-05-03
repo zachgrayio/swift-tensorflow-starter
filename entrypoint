@@ -4,7 +4,7 @@ CONFIG=$1
 LIVE=$2
 
 build() {
-    swift build --configuration ${CONFIG}
+    swift build -Xswiftc -O --configuration ${CONFIG}
 }
 
 install_application() {

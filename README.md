@@ -182,6 +182,12 @@ NOTE: if you don't include the `-b|--build` flag to `app run` then the previousl
 
 # Usage
 
+### Writing TensorFlow Code
+
+Something to keep in mind when writing your TensorFlow code, as to avoid issues with send/receive (from the [official FAQ](https://github.com/tensorflow/swift/blob/master/FAQ.md#why-do-i-get-error-internal-error-generating-tensorflow-graph-graphgen-cannot-lower-a-sendreceive-to-the-host-yet)):
+
+>We recommend separating functions that do tensor computation from host code in your programs. Those functions should be marked as `@inline(never)` (and have `public` access, to be safe). Within those functions, tensor computation should not be interrupted by host code. This ensures that the arguments and results of the extracted tensor program will be values on the host, as expected.
+
 ### SwiftPM Project Settings
 
 By default the following names are used:
@@ -247,7 +253,7 @@ If you wish to run `swift build` and `swift run` on your project outside of the 
 
 ```bash
 export PATH=/Library/Developer/Toolchains/swift-latest/usr/bin:"${PATH}"
-swift run
+swift run -Xswiftc -O
 ```
 
 # License
