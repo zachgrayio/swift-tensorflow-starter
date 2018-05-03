@@ -98,7 +98,7 @@ case ${STS_COMMAND} in
         if [ "$STS_LIVE_ENABLED" = true ] ; then
             echo -e "[STS][test][${STS_COMMAND_ARG}] ignoring unsupported flag: ${TXT_YELLOW}-l|--live${TXT_NC}"
         fi
-        RUN_COMMAND="docker run --rm -it ${STS_LIVE_FLAG} ${STS_VOLUME_FLAG} --entrypoint "/usr/bin/swift" ${STS_NAME} test"
+        RUN_COMMAND="docker run --rm -it ${STS_LIVE_FLAG} ${STS_VOLUME_FLAG} --entrypoint "/usr/bin/swift" ${STS_NAME} test -Xswiftc -O"
         ;;
         xcode)
         if [ "$STS_LIVE_ENABLED" = true ] ; then
