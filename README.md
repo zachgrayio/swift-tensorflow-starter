@@ -94,7 +94,7 @@ After this, any changes you make to the project will result in the Swift code be
 
 That's it! However, it's recommended to continue reading and learn more about the underlying Docker container.
 
-## The Hard Way
+## The Other Way
 
 The following 4 steps describe how to add your code, build, and run the project with nothing other than the Docker binary; this should be relatively accurate cross-platform.
 
