@@ -96,7 +96,7 @@ case ${STS_COMMAND} in
         test|tests)
         # TODO: Finish live reloaded tests; need to think about the --entrypoint usage
         if [ "$STS_LIVE_ENABLED" = true ] ; then
-            echo -e "[STS][test][${STS_COMMAND_ARG}] ignoring unsupported flag: ${TXT_YELLOW}-l|--live${TXT_NC}"
+            echo -e "[STS][run][${STS_COMMAND_ARG}] ignoring unsupported flag: ${TXT_YELLOW}-l|--live${TXT_NC}"
         fi
         RUN_COMMAND="docker run --rm -it ${STS_LIVE_FLAG} ${STS_VOLUME_FLAG} --entrypoint "/usr/bin/swift" ${STS_NAME} test -Xswiftc -O"
         ;;
